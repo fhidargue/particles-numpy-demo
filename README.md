@@ -2,9 +2,9 @@
 
 This project implements a **high-performance GPU particle system** in Python using:
 
-- **NumPy** for vectorized particle simulation  
-- **PyOpenGL** for rendering  
-- **PySide6** (`QOpenGLWindow`) for real-time visualization  
+- **NumPy** for vectorized particle simulation
+- **PyOpenGL** for rendering
+- **PySide6** (`QOpenGLWindow`) for real-time visualization
 - **ncca.ngl** helpers (ShaderLib, VAOFactory, Vec3, etc.)
 
 The emitter updates thousands of particles using vectorized operations and streams the particle attributes (position + color) directly to GPU buffers every frame.
@@ -14,6 +14,8 @@ The emitter updates thousands of particles using vectorized operations and strea
 ```mermaid
 classDiagram
     class Emitter {
+        - int max_per_frame
+        - Tuple[int, int] life_range
         - Vec3 _position
         - ndarray _position_np
         - int _num_particles
@@ -23,6 +25,8 @@ classDiagram
         - ndarray life
         - ndarray max_life
         - ndarray size
+        - ndarray alive
+        - int max_alive
         + __init__(position, num_particles)
         + _init_particles()
         + _respawn_particles(indices)
